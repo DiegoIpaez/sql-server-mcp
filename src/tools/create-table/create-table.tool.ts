@@ -1,18 +1,20 @@
-import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { TableSchema } from '../../schemas.js';
+import { TableSchema } from '../../contracts/schemas/index.js';
+import type { Tool } from '../../contracts/types/index.js';
 import { generateTable } from './create-table.service.js';
 
-const TOOL_COMMAND_NAME = 'create-table';
-const TOOL_COMMAND_TITLE = 'Create Table Tool';
-const TOOL_COMMAND_DESCRIPTION =
-  'Esta es una herramienta para crear tablas en mi base de datos de SQL Server';
+const CREATE_TABLE_TOOL_COMMANDS = {
+  NAME: 'create-table',
+  TITLE: 'Create Table Tool',
+  DESCRIPTION:
+    'Esta es una herramienta para crear tablas en mi base de datos de SQL Server',
+};
 
-export function registerCreateTableTool(server: McpServer) {
-  const config = {
-    title: TOOL_COMMAND_TITLE,
-    description: TOOL_COMMAND_DESCRIPTION,
-    inputSchema: TableSchema,
-  };
-
-  server.registerTool(TOOL_COMMAND_NAME, config, generateTable);
-}
+export const createTableTool: Tool = {
+  name: CREATE_TABLE_TOOL_COMMANDS.NAME,
+  title: CREATE_TABLE_TOOL_COMMANDS.TITLE,
+  description: CREATE_TABLE_TOOL_COMMANDS.DESCRIPTION,
+  inputSchema: TableSchema,
+  toolCallback: generateTable,
+  error:
+    'Error al crear la tabla. Verifica que la información proporcionada sea correcta.',
+};
