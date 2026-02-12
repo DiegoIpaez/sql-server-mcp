@@ -1,5 +1,5 @@
 import { prisma } from '../../lib/db';
-import type { TableSchemaDTO } from '../../schemas';
+import type { TableSchemaDTO } from '../../contracts/schemas';
 
 async function generateTableSQL(
   tableName: string,

@@ -1,18 +1,18 @@
-import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { QuerySchema } from '../../schemas.js';
+import { QuerySchema } from '../../contracts/schemas/index.js';
+import type { Tool } from '../../contracts/types/index.js';
 import { executeRawQueries } from './execute-raw-queries.service.js';
 
-const TOOL_COMMAND_NAME = 'execute-raw-queries';
-const TOOL_COMMAND_TITLE = 'Execute Raw Queries Tool';
-const TOOL_COMMAND_DESCRIPTION =
-  'Esta herramienta permite ejecutar consultas SQL raw en la base de datos SQL Server, aceptando múltiples sentencias a la vez';
+const EXECUTE_RAW_QUERIES_TOOL_COMMANDS = {
+  NAME: 'execute-raw-queries',
+  TITLE: 'Execute Raw Queries Tool',
+  DESCRIPTION:
+    'Esta herramienta permite ejecutar consultas SQL raw en la base de datos SQL Server, aceptando múltiples sentencias a la vez',
+};
 
-export function registerExecuteRawQueriesTool(server: McpServer) {
-  const config = {
-    title: TOOL_COMMAND_TITLE,
-    description: TOOL_COMMAND_DESCRIPTION,
-    inputSchema: QuerySchema,
-  };
-
-  server.registerTool(TOOL_COMMAND_NAME, config, executeRawQueries);
-}
+export const executeRawQueriesTool: Tool = {
+  name: EXECUTE_RAW_QUERIES_TOOL_COMMANDS.NAME,
+  title: EXECUTE_RAW_QUERIES_TOOL_COMMANDS.TITLE,
+  description: EXECUTE_RAW_QUERIES_TOOL_COMMANDS.DESCRIPTION,
+  inputSchema: QuerySchema,
+  toolCallback: executeRawQueries,
+};

@@ -1,5 +1,5 @@
 import { prisma } from '../../lib/db.js';
-import type { InsertDataInputDTO } from '../../schemas.js';
+import type { InsertDataInputDTO } from '../../contracts/schemas/index.js';
 
 export const insertData = async (args: InsertDataInputDTO) => {
   const { tableName, data } = args;

@@ -1,5 +1,5 @@
 import { prisma } from '../../lib/db.js';
-import type { GetTableSchemaInputDTO } from '../../schemas.js';
+import type { GetTableSchemaInputDTO } from '../../contracts/schemas/index.js';
 
 export const getTableSchema = async (args: GetTableSchemaInputDTO) => {
   const { tableName } = args;
