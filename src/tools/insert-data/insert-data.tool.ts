@@ -15,4 +15,6 @@ export const insertDataTool: Tool = {
   description: INSERT_DATA_TOOL_COMMANDS.DESCRIPTION,
   inputSchema: InsertDataInputSchema,
   toolCallback: insertData,
+  error:
+    'Error al insertar los datos. Verifica que la tabla exista y que los datos sean correctos.',
 };

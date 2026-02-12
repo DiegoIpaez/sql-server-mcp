@@ -6,4 +6,5 @@ export type Tool = {
   description: string;
   inputSchema: z.ZodObject<any>;
   toolCallback: (...args: any[]) => any;
+  error?: string;
 };

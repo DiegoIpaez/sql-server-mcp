@@ -1,4 +1,5 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { toolErrorHandler } from './error-handler.mcp';
 import * as tools from '../../tools';
 
 export const registerTools = (server: McpServer) => {
@@ -9,23 +10,23 @@ export const registerTools = (server: McpServer) => {
 
       try {
         const result = await tool.toolCallback(args);
-
         console.log('[MCP] Output:', JSON.stringify(result, null, 2));
         console.log(`[MCP] Tool "${tool.name}" executed successfully.\n`);
-
         return result;
       } catch (error) {
-        console.error(`[MCP] Tool "${tool.name}" failed:`, error);
-        throw error;
+        return toolErrorHandler({
+          error: error as Error,
+          fallbackMsg: tool.error,
+        });
       }
     };
 
-    const config = {
+    const toolConfig = {
       title: tool.title,
       description: tool.description,
       inputSchema: tool.inputSchema,
     };
-    server.registerTool(tool.name, config, toolCb);
+    server.registerTool(tool.name, toolConfig, toolCb);
     console.log(`[MCP] Tool "${tool.name}" loaded successfully.`);
   }
 };

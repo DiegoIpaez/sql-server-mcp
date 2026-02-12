@@ -15,4 +15,6 @@ export const createTableTool: Tool = {
   description: CREATE_TABLE_TOOL_COMMANDS.DESCRIPTION,
   inputSchema: TableSchema,
   toolCallback: generateTable,
+  error:
+    'Error al crear la tabla. Verifica que la información proporcionada sea correcta.',
 };

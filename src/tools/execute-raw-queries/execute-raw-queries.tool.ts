@@ -15,4 +15,6 @@ export const executeRawQueriesTool: Tool = {
   description: EXECUTE_RAW_QUERIES_TOOL_COMMANDS.DESCRIPTION,
   inputSchema: QuerySchema,
   toolCallback: executeRawQueries,
+  error:
+    'Error al ejecutar las sentencias. Verifica que las consultas sean correctas.',
 };

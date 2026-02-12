@@ -15,4 +15,6 @@ export const getTableSchemaTool: Tool = {
   description: GET_TABLE_SCHEMA_TOOL_COMMANDS.DESCRIPTION,
   inputSchema: GetTableSchemaInputSchema,
   toolCallback: getTableSchema,
+  error:
+    'Error al obtener la estructura de la tabla. Verifica que la tabla exista.',
 };
