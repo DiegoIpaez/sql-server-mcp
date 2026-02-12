@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql_mcp
+    environment:
+      ACCEPT_EULA: 'Y'
+      SA_PASSWORD: 'yourStrong#Password'
+      MSSQL_PID: 'Developer'
+    ports:
+      - '1433:1433'
+    volumes:
+      - .docker/mssql:/var/opt/mssql
