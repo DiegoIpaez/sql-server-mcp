@@ -59,20 +59,20 @@ bun run start
 
 ## Scripts
 
-En el archivo `package.json` se definen los siguientes scripts para automatizar tareas comunes del proyecto:
+The `package.json` file defines the following scripts to automate common project tasks:
 
-| Script         | Comando                                         | Descripción                                                                                 |
-| -------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| dev            | bun run --watch ./src/index.ts                  | Inicia el servidor MCP en modo desarrollo con recarga automática al guardar cambios.         |
-| build          | bun build ./src/index.ts --outdir ./build --minify --target node | Compila y minifica el código fuente TypeScript a JavaScript listo para producción.           |
-| start          | bun run ./build/index.js                        | Ejecuta el servidor MCP compilado en modo producción.                                        |
-| format         | biome format --write .                          | Formatea todo el código fuente del proyecto usando Biome.                                    |
-| lint           | biome lint --write .                            | Aplica y corrige automáticamente los problemas de linting detectados por Biome.              |
-| check          | biome check .                                   | Realiza un chequeo estático del código fuente usando Biome.                                  |
-| postinstall    | prisma generate                                 | Genera el cliente Prisma automáticamente después de instalar dependencias.                   |
-| test:mcp       | npx @modelcontextprotocol/inspector node ./build/index.js | Ejecuta el inspector MCP para pruebas sobre el servidor MCP compilado.                      |
+| Script      | Command                                              | Description                                                                                 |
+| ----------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| dev         | bun run --watch ./src/index.ts                       | Starts the MCP server in development mode with automatic reload on file changes.            |
+| build       | bun build ./src/index.ts --outdir ./build --minify --target node | Compiles and minifies the TypeScript source code to production-ready JavaScript.            |
+| start       | bun run ./build/index.js                             | Runs the compiled MCP server in production mode.                                            |
+| format      | biome format --write .                               | Formats all project source code using Biome.                                                |
+| lint        | biome lint --write .                                 | Applies and automatically fixes linting issues detected by Biome.                           |
+| check       | biome check .                                        | Performs static code analysis using Biome.                                                  |
+| postinstall | prisma generate                                      | Automatically generates the Prisma client after installing dependencies.                     |
+| test:mcp    | npx @modelcontextprotocol/inspector node ./build/index.js | Runs the MCP inspector for testing the compiled MCP server.                                 |
 
-Puedes ejecutar estos scripts con `bun run <script>` (por ejemplo, `bun run dev`).
+You can run these scripts with `bun run <script>` (for example, `bun run dev`).
 
 ## Tools Architecture
 
