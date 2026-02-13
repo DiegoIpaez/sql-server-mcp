@@ -1,4 +1,4 @@
-import logger from "../logger.util";
+import logger from '../logger.util';
 
 type ErrorResponse = {
   content: { type: 'text'; text: string }[];
