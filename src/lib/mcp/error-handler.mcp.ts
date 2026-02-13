@@ -1,3 +1,5 @@
+import logger from '../logger.util';
+
 type ErrorResponse = {
   content: { type: 'text'; text: string }[];
   isError: boolean;
@@ -8,7 +10,7 @@ type ErrorHandler = (params: {
 }) => ErrorResponse;
 
 export const toolErrorHandler: ErrorHandler = ({ error, fallbackMsg }) => {
-  console.error(`[MCP] Tool "${fallbackMsg}" failed:`, error);
+  logger.error(`Tool "${fallbackMsg}" failed:`, { error });
   const errorMessage =
     fallbackMsg ?? (error instanceof Error ? error.message : 'Unknown error');
 
