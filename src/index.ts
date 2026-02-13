@@ -4,7 +4,7 @@ import logger from './lib/logger.util';
 import { registerTools } from './lib/mcp/register-tool.mcp';
 
 const server = new McpServer(
-  { name: 'sql-server-mcp', version: '0.0.1' },
+  { name: 'sql-server-mcp', version: '1.0.0' },
   { capabilities: { tools: {} } },
 );
 
