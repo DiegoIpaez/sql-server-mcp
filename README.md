@@ -57,6 +57,23 @@ bun run build
 bun run start
 ```
 
+## Scripts
+
+En el archivo `package.json` se definen los siguientes scripts para automatizar tareas comunes del proyecto:
+
+| Script         | Comando                                         | Descripción                                                                                 |
+| -------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| dev            | bun run --watch ./src/index.ts                  | Inicia el servidor MCP en modo desarrollo con recarga automática al guardar cambios.         |
+| build          | bun build ./src/index.ts --outdir ./build --minify --target node | Compila y minifica el código fuente TypeScript a JavaScript listo para producción.           |
+| start          | bun run ./build/index.js                        | Ejecuta el servidor MCP compilado en modo producción.                                        |
+| format         | biome format --write .                          | Formatea todo el código fuente del proyecto usando Biome.                                    |
+| lint           | biome lint --write .                            | Aplica y corrige automáticamente los problemas de linting detectados por Biome.              |
+| check          | biome check .                                   | Realiza un chequeo estático del código fuente usando Biome.                                  |
+| postinstall    | prisma generate                                 | Genera el cliente Prisma automáticamente después de instalar dependencias.                   |
+| test:mcp       | npx @modelcontextprotocol/inspector node ./build/index.js | Ejecuta el inspector MCP para pruebas sobre el servidor MCP compilado.                      |
+
+Puedes ejecutar estos scripts con `bun run <script>` (por ejemplo, `bun run dev`).
+
 ## Tools Architecture
 
 The `tools` folder is designed for modular and scalable integration of MCP tools for SQL Server operations. Each tool is organized in its own subdirectory, following this pattern:
