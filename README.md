@@ -57,8 +57,58 @@ bun run build
 bun run start
 ```
 
-## Using with VS Code MCP Client
+## Scripts
 
-1. Open VS Code and install the "Model Context Protocol Client" extension.
-2. Connect the extension to this MCP server (usually via stdio or TCP, depending on your setup).
-3. Use the extension to interact with your SQL Server through the registered tools (create table, insert data, get schema, execute raw queries).
+The `package.json` file defines the following scripts to automate common project tasks:
+
+| Script      | Command                                              | Description                                                                                 |
+| ----------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| dev         | bun run --watch ./src/index.ts                       | Starts the MCP server in development mode with automatic reload on file changes.            |
+| build       | bun build ./src/index.ts --outdir ./build --minify --target node | Compiles and minifies the TypeScript source code to production-ready JavaScript.            |
+| start       | bun run ./build/index.js                             | Runs the compiled MCP server in production mode.                                            |
+| format      | biome format --write .                               | Formats all project source code using Biome.                                                |
+| lint        | biome lint --write .                                 | Applies and automatically fixes linting issues detected by Biome.                           |
+| check       | biome check .                                        | Performs static code analysis using Biome.                                                  |
+| postinstall | prisma generate                                      | Automatically generates the Prisma client after installing dependencies.                     |
+| test:mcp    | npx @modelcontextprotocol/inspector node ./build/index.js | Runs the MCP inspector for testing the compiled MCP server.                                 |
+
+You can run these scripts with `bun run <script>` (for example, `bun run dev`).
+
+## Tools Architecture
+
+The `tools` folder is designed for modular and scalable integration of MCP tools for SQL Server operations. Each tool is organized in its own subdirectory, following this pattern:
+
+- `<tool-name>.service.ts`: Business logic and database access.
+- `<tool-name>.tool.ts`: MCP tool definition, registration, and input/output schema.
+
+The `tools/index.ts` centralizes the registration of all available tools.
+
+### Current Structure
+
+```
+tools/
+   index.ts
+   create-table/
+      create-table.service.ts
+      create-table.tool.ts
+   execute-raw-queries/
+      execute-raw-queries.service.ts
+      execute-raw-queries.tool.ts
+   get-table-schema/
+      get-table-schema.service.ts
+      get-table-schema.tool.ts
+   insert-data/
+      insert-data.service.ts
+      insert-data.tool.ts
+```
+
+### Architectural Principles
+
+- **Modularity:** Each tool is isolated in its own subdirectory for easy maintenance and extension.
+- **Separation of concerns:** `.service.ts` handles data access logic, `.tool.ts` defines the MCP contract and integration.
+- **Scalability:** New tools can be added by following the same folder and file pattern.
+- **Centralization:** `tools/index.ts` registers and exposes all tools to the MCP server.
+
+### Integration
+
+Tools are registered and exposed via the MCP server, allowing clients (such as the VS Code extension) to interact with SQL Server through operations like create table, execute queries, get schema, and insert data.
